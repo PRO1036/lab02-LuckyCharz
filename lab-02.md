@@ -129,22 +129,74 @@ différents pics et la concentration dans certaines zones.
 ### Exercise 4
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, 
+                          y = mismanaged_plastic_waste_per_cap, 
+                          color = continent)) +
+  geom_point(size = 3, alpha = 0.7) +
+  labs(
+    title = "Relation entre déchets plastiques générés et mal gérés (2010)",
+    x = "Déchets plastiques par habitant (kg/jour)",
+    y = "Déchets plastiques mal gérés par habitant (kg/jour)",
+    color = "Continent"
+  ) +
+  theme_minimal()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
+
+Oui, il y a une tendance. Plus un pays génère de déchets plastiques par
+habitant, plus la quantité de déchets mal gérés par habitant a tendance
+à augmenter. Ce n’est pas uniforme, car certains continents ont des
+systèmes de gestion des déchets plus efficaces, mais plus de déchets
+comme l’Europe et l’Amérique du Nord. Dans le cas de l’Asie et
+l’Afrique, il y a moins de déchets, mais leur gestion des déchets est
+beaucoup moins bien géré. Pour l’Océanie et l’Amérique du Sud, ils sont
+plutôt intermédiaires.
 
 ### Exercise 5
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, 
+                          y = total_pop, 
+                          color = continent)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_y_log10(labels = scales::comma) +
+  labs(
+    title = "Déchets plastiques par habitant vs population totale (2010)",
+    x = "Déchets plastiques par habitant (kg/jour)",
+    y = "Population totale (log10)",
+    color = "Continent"
+  ) +
+  theme_minimal()
 ```
+
+    ## Warning: Removed 10 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](lab-02_files/figure-gfm/plastic-waste-population-total-1.png)<!-- -->
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap,
+                                y = coastal_pop,
+                                color = continent)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_y_log10(labels = scales::comma) +
+  labs(
+    title = "Déchets plastiques par habitant vs population côtière (2010)",
+    x = "Déchets plastiques par habitant (kg/jour)",
+    y = "Population côtière (log10)",
+    color = "Continent"
+  ) +
+  theme_minimal()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
+
+Il y a une relation plus faible entre le nombre de déchets par habitant
+et la population totale.Par contre, il y a une relation plus pertinente
+et visible entre le nombre de déchets par habitant et la population
+côtière, car cette variable est directement liée au risque de pollution
+marine.
 
 ## Conclusion
 

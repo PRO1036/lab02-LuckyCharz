@@ -167,5 +167,29 @@ Il y a une relation plus faible entre le nombre de déchets par habitant et la p
 Recréez la visualisation:
 
 ```{r recreate-viz}
-# insert code here
+library(ggplot2)
+library(dplyr)
+
+# Préparation des données
+plastic_waste_coastal <- plastic_waste %>% 
+  mutate(coastal_pop_prop = coastal_pop / total_pop) %>% 
+  filter(plastic_waste_per_cap < 3)
+
+# Graphe
+ggplot(plastic_waste_coastal, aes(x = coastal_pop_prop, 
+                                  y = plastic_waste_per_cap, 
+                                  color = continent)) +
+  geom_point(alpha = 0.7, size = 2) +
+  geom_smooth(method = "loess", se = TRUE, color = "black") +
+  labs(
+    title = "Quantité de déchets plastiques vs Proportion de la population côtière",
+    subtitle = "Selon le continent",
+    x = "Proportion de la population côtière (Coastal / total population)",
+    y = "Nombre de déchets plastiques par habitant",
+    color = "Continent"
+  ) +
+  theme_minimal()
+
 ```
+
+Interprétation : La consommation de plastique par habitant est davantage liée au développement économique qu’à la géographie (proportion côtière).La proportion côtière reste un facteur de vulnérabilité environnementale : même si la consommation de plastique n’est pas la plus élevée, les pays où une grande partie de la population vit près des côtes présentent un risque accru que les déchets plastiques finissent directement dans l’océan.Ainsi, ce graphe illustre bien que la pollution plastique marine est un problème combinant facteurs économiques et géographiques.
